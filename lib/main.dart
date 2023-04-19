@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:pose_detection/exercise/presentation/screens/daily_goal.dart';
 import 'package:pose_detection/pose_detector_view.dart';
 import 'package:pose_detection/root_scaffold.dart';
 
