@@ -84,7 +84,7 @@ class _CameraViewState extends State<CameraView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /* appBar: AppBar(
         title: Text(widget.title),
         actions: [
           if (_allowPicker)
@@ -102,6 +102,9 @@ class _CameraViewState extends State<CameraView> {
               ),
             ),
         ],
+      ), */
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(198, 83, 104, 1),
       ),
       body: _body(),
       floatingActionButton: _floatingActionButton(),
@@ -116,6 +119,7 @@ class _CameraViewState extends State<CameraView> {
         height: 70.0,
         width: 70.0,
         child: FloatingActionButton(
+          backgroundColor: Color.fromRGBO(198, 83, 104, 1),
           onPressed: _switchLiveCamera,
           child: Icon(
             Platform.isIOS
@@ -166,12 +170,23 @@ class _CameraViewState extends State<CameraView> {
                   : CameraPreview(_controller!),
             ),
           ),
+          Positioned(
+            top: 20,
+            child: Container(
+              width: 60,
+              height: 30,
+              color: Colors.amber,
+              child: Text(widget.text!),
+            ),
+          ),
           if (widget.customPaint != null) widget.customPaint!,
           Positioned(
             bottom: 100,
             left: 50,
             right: 50,
             child: Slider(
+              activeColor: Color.fromRGBO(198, 83, 104, 1),
+              inactiveColor: Color.fromRGBO(198, 83, 104, 1),
               value: zoomLevel,
               min: minZoomLevel,
               max: maxZoomLevel,
