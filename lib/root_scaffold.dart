@@ -12,9 +12,7 @@ class RootScaffold extends StatefulWidget {
 class _RootScaffoldState extends State<RootScaffold> {
   final List<Widget> _screens = [
     HomePage(),
-    Scaffold(
-      body: PoseDetectorView(),
-    ),
+    Scaffold(),
     Scaffold(),
     Scaffold(),
     Scaffold(),
