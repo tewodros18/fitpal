@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: RootScaffold()
+      // home: RootScaffold(),
+      home: button(),
     );
   }
 }
@@ -35,8 +36,13 @@ class button extends StatelessWidget {
     return Center(
       child: ElevatedButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => PoseDetectorView()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PoseDetectorView(
+                          exerciseType: 'JUMPING-JACKS',
+                          enableMonitoring: false,
+                        )));
           },
           child: Text("Push up")),
     );

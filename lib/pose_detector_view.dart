@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_pose_detection/google_mlkit_pose_detection.dart';
+import 'package:pose_detection/jumping_jacks.dart';
+import 'package:pose_detection/passed_challenge.dart';
 
 import 'camera_view.dart';
+import 'exercise.dart';
+import 'homepage/homepage.dart';
 import 'painters/pose_painter.dart';
 import 'package:text_to_speech/text_to_speech.dart';
 
@@ -23,8 +27,18 @@ double getAngle(
 }
 
 class PoseDetectorView extends StatefulWidget {
+  final String exerciseType;
+  final bool enableMonitoring;
+  int? target;
+
   @override
   State<StatefulWidget> createState() => _PoseDetectorViewState();
+
+  PoseDetectorView(
+      {super.key,
+      required this.exerciseType,
+      required this.enableMonitoring,
+      this.target});
 }
 
 class _PoseDetectorViewState extends State<PoseDetectorView> {
@@ -33,7 +47,7 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
   bool _canProcess = true;
   bool _isBusy = false;
   CustomPaint? _customPaint;
-  String? _text;
+  String? _text = "Test";
 
   @override
   void dispose() async {
@@ -49,7 +63,7 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
       customPaint: _customPaint,
       text: _text,
       onImage: (inputImage) {
-        processImage(inputImage);
+        processImage(context, inputImage);
       },
     );
   }
@@ -57,7 +71,8 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
   int count = 0;
   bool counted = false;
   bool neutral = true;
-  Future<void> processImage(InputImage inputImage) async {
+
+  Future<void> processImage(BuildContext context, InputImage inputImage) async {
     if (!_canProcess) return;
     if (_isBusy) return;
     _isBusy = true;
@@ -65,23 +80,43 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
       _text = count.toString();
     });
     final poses = await _poseDetector.processImage(inputImage);
+    print(poses);
     if (poses.isNotEmpty) {
-      print(poses[0].landmarks[PoseLandmarkType.nose]);
-      double elbowAngle = getAngle(
-          poses[0].landmarks[PoseLandmarkType.rightWrist]!,
-          poses[0].landmarks[PoseLandmarkType.rightElbow]!,
-          poses[0].landmarks[PoseLandmarkType.rightShoulder]!);
-      print(elbowAngle);
-      if (elbowAngle <= 25 && !counted == true) {
-        count += 1;
-        TextToSpeech tts = TextToSpeech();
-        String text = count.toString();
-        tts.speak(text);
-        counted = true;
+      // double elbowAngle = getAngle(
+      //     poses[0].landmarks[PoseLandmarkType.rightWrist]!,
+      //     poses[0].landmarks[PoseLandmarkType.rightElbow]!,
+      //     poses[0].landmarks[PoseLandmarkType.rightShoulder]!);
+
+      Exercise exercise =
+          JumpingJacks(name: "JUMPING-JACKS", type: "JUMPING-JACKS");
+
+      switch (widget.exerciseType) {
+        case "JUMPING-JACKS":
+          exercise = JumpingJacks(
+            name: "JUMPING-JACKS",
+            type: "JUMPING-JACKS",
+            enableMonitoring: widget.enableMonitoring,
+            target: widget.target,
+          );
       }
-      if (elbowAngle >= 160 && counted) {
-        counted = false;
+
+      int response = exercise.processExercise(poses);
+
+      if (response == 1) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const PassedChallenge()));
       }
+
+      // if (elbowAngle <= 25 && !counted == true) {
+      //   count += 1;
+      //   TextToSpeech tts = TextToSpeech();
+      //   String text = count.toString();
+      //   tts.speak(text);
+      //   counted = true;
+      // }
+      // if (elbowAngle >= 160 && counted) {
+      //   counted = false;
+      // }
     }
 
     if (inputImage.inputImageData?.size != null &&
