@@ -62,7 +62,7 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
     if (_isBusy) return;
     _isBusy = true;
     setState(() {
-      _text = '';
+      _text = count.toString();
     });
     final poses = await _poseDetector.processImage(inputImage);
     if (poses.isNotEmpty) {
