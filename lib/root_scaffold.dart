@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pose_detection/exercise/presentation/screens/daily_goal.dart';
 import 'package:pose_detection/homepage/homepage.dart';
 import 'package:pose_detection/pose_detector_view.dart';
 
@@ -13,7 +14,7 @@ class _RootScaffoldState extends State<RootScaffold> {
   final List<Widget> _screens = [
     HomePage(),
     Scaffold(),
-    Scaffold(),
+    DailyGoal(),
     Scaffold(),
     Scaffold(),
   ];
@@ -46,7 +47,7 @@ class _RootScaffoldState extends State<RootScaffold> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.location_searching_rounded),
-            label: "Explore",
+            label: "Nutrition",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
