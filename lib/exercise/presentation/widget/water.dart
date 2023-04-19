@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class WaterTarget extends StatelessWidget {
-  const WaterTarget({super.key});
+  final int litter;
+  const WaterTarget({super.key, required this.litter});
 
   @override
   Widget build(BuildContext context) {
@@ -9,22 +10,22 @@ class WaterTarget extends StatelessWidget {
       height: 100,
       width: 300,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15), color: Color(0xffC65368)),
+          borderRadius: BorderRadius.circular(15), color: const Color(0xffC65368)),
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
         Image.asset('assets/icons/Water.png'),
-        const Row(
+        Row(
           children: [
             Text(
-              "0.5 of 2",
-              style: TextStyle(
+              "$litter of 2000",
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
                 color: Colors.white,
               ),
             ),
-            SizedBox(width: 10),
-            Text(
-              "Litters",
+            const SizedBox(width: 10),
+            const Text(
+              "ml",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 10,
