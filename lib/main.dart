@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:pose_detection/pose_detector_view.dart';
+import 'package:pose_detection/root_scaffold.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -19,12 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: button(),
-      ),
+      home: RootScaffold()
     );
   }
 }
