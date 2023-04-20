@@ -15,17 +15,17 @@ class PosePainter extends CustomPainter {
     final paint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 4.0
-      ..color = Colors.green;
+      ..color = Colors.white;
 
     final leftPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0
-      ..color = Colors.yellow;
+      ..color = Colors.green;
 
     final rightPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0
-      ..color = Colors.blueAccent;
+      ..color = Colors.green;
 
     for (final pose in poses) {
       pose.landmarks.forEach((_, landmark) {
@@ -53,6 +53,8 @@ class PosePainter extends CustomPainter {
       //Draw arms
       paintLine(
           PoseLandmarkType.leftShoulder, PoseLandmarkType.leftElbow, leftPaint);
+      paintLine(PoseLandmarkType.leftShoulder, PoseLandmarkType.rightShoulder,
+          leftPaint);
       paintLine(
           PoseLandmarkType.leftElbow, PoseLandmarkType.leftWrist, leftPaint);
       paintLine(PoseLandmarkType.rightShoulder, PoseLandmarkType.rightElbow,

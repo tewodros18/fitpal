@@ -48,7 +48,13 @@ class JumpingJacks implements Exercise {
   };
 
   int counter = 0;
+  bool counted = false;
   List<String> stateSeq = [];
+
+  @override
+  int getCount() {
+    return counter;
+  }
 
   void _updateStateSeq(String state) {
     if (state == "TRANSITION") {
@@ -82,6 +88,7 @@ class JumpingJacks implements Exercise {
   String getState(double leftShoulderAngle, rightShoulderAngle, hipAngle) {
     print("left ${leftShoulderAngle}");
     print("right ${rightShoulderAngle}");
+
     if (angleThresholdsPerState['NORMAL']['SHOULDER'][0] >= leftShoulderAngle &&
             leftShoulderAngle >=
                 angleThresholdsPerState['NORMAL']['SHOULDER'][1] &&
@@ -92,6 +99,7 @@ class JumpingJacks implements Exercise {
         // angleThresholdsPerState['NORMAL']['HIP'][0] >= hipAngle &&
         // hipAngle >= angleThresholdsPerState['NORMAL']['HIP'][1]
         ) {
+      print("-------------");
       return "NORMAL";
     }
     if (angleThresholdsPerState['TRANSITION']['SHOULDER'][0] >=
@@ -105,6 +113,7 @@ class JumpingJacks implements Exercise {
         // angleThresholdsPerState['TRANSITION']['HIP'][0] >= hipAngle &&
         // hipAngle >= angleThresholdsPerState['TRANSITION']['HIP'][1]
         ) {
+      print("***************");
       return "TRANSITION";
     }
     if (angleThresholdsPerState['PASS']['SHOULDER'][0] >= leftShoulderAngle &&
@@ -116,6 +125,7 @@ class JumpingJacks implements Exercise {
         // angleThresholdsPerState['PASS']['HIP'][0] >= hipAngle &&
         // hipAngle >= angleThresholdsPerState['PASS']['HIP'][1]
         ) {
+      print("///////////////////");
       return "PASS";
     }
 
@@ -141,7 +151,21 @@ class JumpingJacks implements Exercise {
         getState(leftShoulderAngle, rightShoulderAngle, hipAngle);
     _updateStateSeq(currentState);
 
-    // tts.speak(currentState);
+    if (currentState == "PASS" && !counted == true) {
+      counted = true;
+      counter += 1;
+      TextToSpeech tts = TextToSpeech();
+      String text = counter.toString();
+      tts.speak(text);
+    }
+    if (currentState == "NORMAL" && counted) {
+      counted = false;
+    }
+    if (target != null && counter == target) {
+      tts.speak("Congratulations, You have completed the challenge");
+      return 1;
+    }
+
     if (currentState == "NORMAL") {
       if (stateSeq.length == 3) {
         counter++;

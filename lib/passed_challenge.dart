@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:pose_detection/homepage/homepage.dart';
+import 'package:pose_detection/root_scaffold.dart';
 
 class PassedChallenge extends StatelessWidget {
   const PassedChallenge({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Material(
       child: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text("You Have Completed the Challenge."),
             OutlinedButton(
@@ -16,7 +17,7 @@ class PassedChallenge extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const HomePage()));
+                          builder: (context) => const RootScaffold()));
                 },
                 child: Text("Return to Home"))
           ],

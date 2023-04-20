@@ -70,54 +70,56 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                    child:
-                        ListView(scrollDirection: Axis.horizontal, children: [
-                      Draggable(
-                        data: "assets/squat.glb",
-                        childWhenDragging: Container(),
-                        feedback: workout(
-                          name: "Squat",
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        Draggable(
+                          data: "assets/squat.glb",
+                          childWhenDragging: Container(),
+                          feedback: workout(
+                            name: "Squat",
+                          ),
+                          child: workout(
+                            name: "Squat",
+                          ),
+                          onDragCompleted: () {
+                            setState(() {
+                              src = "assets/squat.glb";
+                            });
+                          },
                         ),
-                        child: workout(
-                          name: "Squat",
+                        Draggable(
+                          data: "assets/burpee.glb",
+                          childWhenDragging: Container(),
+                          feedback: workout(
+                            name: "Burpee",
+                          ),
+                          child: workout(
+                            name: "Burpee",
+                          ),
+                          onDragCompleted: () {
+                            setState(() {
+                              src = "assets/burpee.glb";
+                            });
+                          },
                         ),
-                        onDragCompleted: () {
-                          setState(() {
-                            src = "assets/squat.glb";
-                          });
-                        },
-                      ),
-                      Draggable(
-                        data: "assets/burpee.glb",
-                        childWhenDragging: Container(),
-                        feedback: workout(
-                          name: "Burpee",
+                        Draggable(
+                          data: "assets/pistol.glb",
+                          childWhenDragging: Container(),
+                          feedback: workout(
+                            name: "Pistol",
+                          ),
+                          child: workout(
+                            name: "Pistol",
+                          ),
+                          onDragCompleted: () {
+                            setState(() {
+                              src = "assets/pistol.glb";
+                            });
+                          },
                         ),
-                        child: workout(
-                          name: "Burpee",
-                        ),
-                        onDragCompleted: () {
-                          setState(() {
-                            src = "assets/burpee.glb";
-                          });
-                        },
-                      ),
-                      Draggable(
-                        data: "assets/pistol.glb",
-                        childWhenDragging: Container(),
-                        feedback: workout(
-                          name: "Pistol",
-                        ),
-                        child: workout(
-                          name: "Pistol",
-                        ),
-                        onDragCompleted: () {
-                          setState(() {
-                            src = "assets/pistol.glb";
-                          });
-                        },
-                      ),
-                    ]),
+                      ],
+                    ),
                   ),
                 ],
               ),
