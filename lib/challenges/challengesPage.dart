@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:pose_detection/challenges/data_provider.dart';
 import 'package:pose_detection/pose_detector_view.dart';
+
+import '../challenge.dart';
 
 class ChallengePage extends StatefulWidget {
   const ChallengePage({super.key});
@@ -9,6 +13,8 @@ class ChallengePage extends StatefulWidget {
 }
 
 class _ChallengePageState extends State<ChallengePage> {
+  List<Challenge> challenges = ChallengeProvider.getChallenges();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +26,7 @@ class _ChallengePageState extends State<ChallengePage> {
             Center(
               child: RichText(
                 text: const TextSpan(
-                  text: "💪🏾 Workouts",
+                  text: "💪🏾 Challenges",
                   style: TextStyle(
                       color: Color.fromRGBO(25, 32, 44, 0.902),
                       fontSize: 25,
@@ -29,66 +35,187 @@ class _ChallengePageState extends State<ChallengePage> {
               ),
             ),
             Expanded(
-              child: ListView(
-                children: [
-                  GestureDetector(
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  Challenge challenge = challenges[index];
+                  return GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => PoseDetectorView(
-                                    exerciseType: 'JUMPING-JACKS',
+                                    exerciseType: challenge.exerciseId,
                                     enableMonitoring: false,
+                                    target: challenge.repetition!.toInt(),
                                   )));
                     },
                     child: exercise_tile(
-                      name: "Jumping Jack",
+                      name: challenge.name,
+                      target: challenge.repetition!.toInt(),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PoseDetectorView(
-                                    exerciseType: 'JUMPING-JACKS',
-                                    enableMonitoring: false,
-                                  )));
-                    },
-                    child: exercise_tile(
-                      name: "Biceps Curls",
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PoseDetectorView(
-                                    exerciseType: 'JUMPING-JACKS',
-                                    enableMonitoring: false,
-                                  )));
-                    },
-                    child: exercise_tile(
-                      name: "Squat",
-                    ),
-                  )
-                ],
+                  );
+                },
+                itemCount: challenges.length,
               ),
             ),
+            // Expanded(
+            //   child: ListView(
+            //     children: [
+            //       GestureDetector(
+            //         onTap: () {
+            //           Navigator.push(
+            //               context,
+            //               MaterialPageRoute(
+            //                   builder: (context) => PoseDetectorView(
+            //                         exerciseType: 'JUMPING-JACKS',
+            //                         enableMonitoring: false,
+            //                         target: 5,
+            //                       )));
+            //         },
+            //         child: exercise_tile(
+            //           name: "Jumping Jack",
+            //           target: 5,
+            //         ),
+            //       ),
+            //       GestureDetector(
+            //         onTap: () {
+            //           Navigator.push(
+            //               context,
+            //               MaterialPageRoute(
+            //                   builder: (context) => PoseDetectorView(
+            //                         exerciseType: 'JUMPING-JACKS',
+            //                         enableMonitoring: false,
+            //                         target: 5,
+            //                       )));
+            //         },
+            //         child: exercise_tile(
+            //           name: "Biceps Curls",
+            //           target: 5,
+            //         ),
+            //       ),
+            //       GestureDetector(
+            //         onTap: () {
+            //           Navigator.push(
+            //               context,
+            //               MaterialPageRoute(
+            //                   builder: (context) => PoseDetectorView(
+            //                         exerciseType: 'JUMPING-JACKS',
+            //                         enableMonitoring: true,
+            //                         target: 5,
+            //                       )));
+            //         },
+            //         child: exercise_tile(
+            //           name: "Squat",
+            //           target: 5,
+            //         ),
+            //       )
+            //     ],
+            //   ),
+            // ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black54,
+        onPressed: () {
+          TextEditingController nameController = TextEditingController();
+          TextEditingController exerciseController = TextEditingController();
+          TextEditingController repetitionController = TextEditingController();
+          String name = "";
+          String exerciseId = "";
+          double rep = 0;
+
+          nameController.addListener(() {
+            name = nameController.value.text;
+          });
+          exerciseController.addListener(() {
+            exerciseId = exerciseController.value.text;
+          });
+          repetitionController.addListener(() {
+            rep = int.parse(repetitionController.value.text).toDouble();
+          });
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("Add a new Challenge"),
+                  content: Card(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Note: Same code is applied for the TextFormField as well
+
+                        TextField(
+                          controller: nameController,
+                          decoration: InputDecoration(
+                            hintText: "Challenge Name",
+                            errorBorder: OutlineInputBorder(
+                              //<-- SEE HERE
+                              borderSide: BorderSide(
+                                  width: 3, color: Colors.greenAccent),
+                            ),
+                          ),
+                        ),
+
+                        TextField(
+                          controller: exerciseController,
+                          decoration: InputDecoration(
+                            hintText: "Exercise Name",
+                            errorBorder: OutlineInputBorder(
+                              //<-- SEE HERE
+                              borderSide: BorderSide(
+                                  width: 3, color: Colors.greenAccent),
+                            ),
+                          ),
+                        ),
+
+                        TextField(
+                          controller: repetitionController,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          decoration: InputDecoration(
+                            hintText: "Number of reps",
+                            errorBorder: OutlineInputBorder(
+                              //<-- SEE HERE
+                              borderSide: BorderSide(
+                                  width: 3, color: Colors.greenAccent),
+                            ),
+                          ),
+                        ),
+
+                        OutlinedButton(
+                            onPressed: () {
+                              debugPrint("dsjkfskdjfkjsdfkjwdfkdjsfnkjdfhkdwj");
+                              debugPrint(name.toString());
+                              debugPrint(exerciseId);
+                              debugPrint(rep.toString());
+                              challenges.add(Challenge(
+                                name: name,
+                                exerciseId: exerciseId,
+                                repetition: rep,
+                              ));
+                              setState(() {});
+                            },
+                            child: Text("Submit"))
+                      ],
+                    ),
+                  ),
+                );
+              });
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
 }
 
 class exercise_tile extends StatelessWidget {
-  final name;
-  const exercise_tile({
-    super.key,
-    this.name,
-  });
+  final String name;
+  final int target;
+
+  const exercise_tile({super.key, required this.name, required this.target});
 
   @override
   Widget build(BuildContext context) {
@@ -131,17 +258,27 @@ class exercise_tile extends StatelessWidget {
                 width: 20,
               ),
               Expanded(
-                flex: 3,
+                flex: 2,
                 child: RichText(
                   text: TextSpan(
                     text: name,
                     style: TextStyle(
                         color: Color.fromRGBO(0, 0, 0, 0.5),
-                        fontSize: 25,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
+              Expanded(
+                  child: RichText(
+                text: TextSpan(
+                  text: "${target.toString()} - Reps",
+                  style: TextStyle(
+                      color: Color.fromRGBO(0, 0, 0, 0.5),
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
+                ),
+              )),
               const Expanded(
                 flex: 1,
                 child: Icon(

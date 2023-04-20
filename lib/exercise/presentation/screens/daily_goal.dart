@@ -88,7 +88,7 @@ class _DailyGoalState extends State<DailyGoal> {
                                               return const Center(
                                                 child:
                                                     CircularProgressIndicator(
-                                                  color: Colors.redAccent,
+                                                  color: Color.fromRGBO(11, 36, 71, 1),
                                                 ),
                                               );
                                             }
@@ -96,7 +96,7 @@ class _DailyGoalState extends State<DailyGoal> {
                                               return const Center(
                                                 child:
                                                     CircularProgressIndicator(
-                                                  color: Colors.redAccent,
+                                                  color: Color.fromRGBO(11, 36, 71, 1),
                                                 ),
                                               );
                                             }
@@ -161,7 +161,7 @@ class _DailyGoalState extends State<DailyGoal> {
                                   actions: [
                                     ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                            primary: const Color(0xffC65368),
+                                            primary: Color.fromRGBO(11, 36, 71, 1),
                                             shadowColor: Colors.black),
                                         onPressed: () {
                                           Navigator.of(context).pop();

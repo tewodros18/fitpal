@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pose_detection/exercise/presentation/screens/daily_goal.dart';
 import 'package:pose_detection/pose_detector_view.dart';
 import 'package:pose_detection/root_scaffold.dart';
+import 'package:pose_detection/sign_in/sign_in_page.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: RootScaffold(),
+      home: MyStatefulWidget(),
       //home: button(),
     );
   }

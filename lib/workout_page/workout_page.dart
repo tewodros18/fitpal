@@ -68,7 +68,6 @@ class _WorkOutPageState extends State<WorkOutPage> {
                               builder: (context) => PoseDetectorView(
                                     exerciseType: 'JUMPING-JACKS',
                                     enableMonitoring: true,
-                                    target: 2,
                                   )));
                     },
                     child: exercise_tile(
@@ -87,6 +86,7 @@ class _WorkOutPageState extends State<WorkOutPage> {
 
 class exercise_tile extends StatelessWidget {
   final name;
+
   const exercise_tile({
     super.key,
     this.name,

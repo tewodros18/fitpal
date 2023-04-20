@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pose_detection/challenges/challengesPage.dart';
 import 'package:pose_detection/exercise/presentation/screens/daily_goal.dart';
 import 'package:pose_detection/homepage/homepage.dart';
 import 'package:pose_detection/pose_detector_view.dart';
@@ -15,10 +16,11 @@ class _RootScaffoldState extends State<RootScaffold> {
   final List<Widget> _screens = [
     HomePage(),
     WorkOutPage(),
-    Scaffold(),
+    ChallengePage(),
     DailyGoal(),
     Scaffold(),
   ];
+
   // final List<IconData> _icons = [Icons.home, Icons.library_music, Icons.person];
   int _selectedIndex = 0;
 
@@ -31,7 +33,7 @@ class _RootScaffoldState extends State<RootScaffold> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 3,
-        selectedItemColor: Color.fromRGBO(198, 83, 104, 1),
+        selectedItemColor: Color.fromRGBO(11, 36, 71, 1),
         currentIndex: _selectedIndex,
         unselectedItemColor: Color.fromRGBO(36, 34, 34, 0.651),
         onTap: (index) => setState(() {

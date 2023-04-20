@@ -145,7 +145,7 @@ class workout extends StatelessWidget {
       height: 100,
       width: 120,
       decoration: BoxDecoration(
-        color: Color.fromRGBO(198, 83, 104, 1),
+        color: Color.fromRGBO(11, 36, 71, 1),
         borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(10),
             topRight: Radius.circular(10),
