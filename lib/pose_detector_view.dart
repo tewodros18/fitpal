@@ -48,6 +48,21 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
   bool _isBusy = false;
   CustomPaint? _customPaint;
   String? _text = "Test";
+  late Exercise exercise;
+  bool completed = false;
+
+  @override
+  void initState() {
+    switch (widget.exerciseType) {
+      case "JUMPING-JACKS":
+        exercise = JumpingJacks(
+          name: "JUMPING-JACKS",
+          type: "JUMPING-JACKS",
+          enableMonitoring: widget.enableMonitoring,
+          target: widget.target,
+        );
+    }
+  }
 
   @override
   void dispose() async {
@@ -71,13 +86,21 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
   int count = 0;
   bool counted = false;
   bool neutral = true;
+  //JumpingJacks(name: "JUMPING-JACKS", type: "JUMPING-JACKS");
+  // Exercise exercise = JumpingJacks(
+  //   name: "JUMPING-JACKS",
+  //   type: "JUMPING-JACKS",
+  //   enableMonitoring: false,
+  //   target: 2,
+  // );
 
   Future<void> processImage(BuildContext context, InputImage inputImage) async {
     if (!_canProcess) return;
     if (_isBusy) return;
     _isBusy = true;
+
     setState(() {
-      _text = count.toString();
+      _text = exercise.getCount().toString();
     });
     final poses = await _poseDetector.processImage(inputImage);
     print(poses);
@@ -87,24 +110,14 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
       //     poses[0].landmarks[PoseLandmarkType.rightElbow]!,
       //     poses[0].landmarks[PoseLandmarkType.rightShoulder]!);
 
-      Exercise exercise =
-          JumpingJacks(name: "JUMPING-JACKS", type: "JUMPING-JACKS");
-
-      switch (widget.exerciseType) {
-        case "JUMPING-JACKS":
-          exercise = JumpingJacks(
-            name: "JUMPING-JACKS",
-            type: "JUMPING-JACKS",
-            enableMonitoring: widget.enableMonitoring,
-            target: widget.target,
-          );
-      }
-
       int response = exercise.processExercise(poses);
 
-      if (response == 1) {
-        Navigator.push(context,
+      if (response == 1 && !completed) {
+        completed = true;
+        Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => const PassedChallenge()));
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context) => const PassedChallenge()));
       }
 
       // if (elbowAngle <= 25 && !counted == true) {

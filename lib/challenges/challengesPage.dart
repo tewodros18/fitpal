@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:pose_detection/pose_detector_view.dart';
 
-import '../pose_detector_view.dart';
-
-class WorkOutPage extends StatefulWidget {
-  const WorkOutPage({super.key});
+class ChallengePage extends StatefulWidget {
+  const ChallengePage({super.key});
 
   @override
-  State<WorkOutPage> createState() => _WorkOutPageState();
+  State<ChallengePage> createState() => _ChallengePageState();
 }
 
-class _WorkOutPageState extends State<WorkOutPage> {
+class _ChallengePageState extends State<ChallengePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,8 +66,7 @@ class _WorkOutPageState extends State<WorkOutPage> {
                           MaterialPageRoute(
                               builder: (context) => PoseDetectorView(
                                     exerciseType: 'JUMPING-JACKS',
-                                    enableMonitoring: true,
-                                    target: 2,
+                                    enableMonitoring: false,
                                   )));
                     },
                     child: exercise_tile(

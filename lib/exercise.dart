@@ -10,4 +10,5 @@ abstract class Exercise {
   });
 
   int processExercise(List<Pose> poses);
+  int getCount();
 }
