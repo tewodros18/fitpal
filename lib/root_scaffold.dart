@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pose_detection/exercise/presentation/screens/daily_goal.dart';
 import 'package:pose_detection/homepage/homepage.dart';
 import 'package:pose_detection/pose_detector_view.dart';
+import 'package:pose_detection/workout_page/workout_page.dart';
 
 class RootScaffold extends StatefulWidget {
   const RootScaffold({Key? key}) : super(key: key);
@@ -13,9 +14,9 @@ class RootScaffold extends StatefulWidget {
 class _RootScaffoldState extends State<RootScaffold> {
   final List<Widget> _screens = [
     HomePage(),
+    WorkOutPage(),
     Scaffold(),
     DailyGoal(),
-    Scaffold(),
     Scaffold(),
   ];
   // final List<IconData> _icons = [Icons.home, Icons.library_music, Icons.person];
@@ -47,11 +48,11 @@ class _RootScaffoldState extends State<RootScaffold> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.location_searching_rounded),
-            label: "Nutrition",
+            label: "Challenges",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
+            icon: Icon(Icons.golf_course_sharp),
+            label: "Goals",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
