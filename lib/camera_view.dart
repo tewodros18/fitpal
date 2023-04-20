@@ -104,7 +104,7 @@ class _CameraViewState extends State<CameraView> {
         ],
       ), */
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(198, 83, 104, 1),
+        backgroundColor: Color.fromRGBO(198, 83, 104, 0),
       ),
       body: _body(),
       floatingActionButton: _floatingActionButton(),
@@ -119,7 +119,7 @@ class _CameraViewState extends State<CameraView> {
         height: 70.0,
         width: 70.0,
         child: FloatingActionButton(
-          backgroundColor: Color.fromRGBO(198, 83, 104, 1),
+          backgroundColor: Color.fromRGBO(198, 83, 104, 0),
           onPressed: _switchLiveCamera,
           child: Icon(
             Platform.isIOS
@@ -171,12 +171,28 @@ class _CameraViewState extends State<CameraView> {
             ),
           ),
           Positioned(
-            top: 20,
-            child: Container(
-              width: 60,
-              height: 30,
-              color: Colors.amber,
-              child: Text(widget.text!),
+            top: -15,
+            left: 65,
+            child: Stack(
+              children: [
+                SizedBox(
+                  width: 540,
+                  height: 200,
+                  child: Image.asset(
+                    'assets/flames.gif',
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                Positioned(
+                  left: 245,
+                  top: 70,
+                  child: CircleAvatar(
+                      child: Text(widget.text!,
+                          style: TextStyle(fontSize: 25, color: Colors.red)),
+                      backgroundColor: Colors.white,
+                      maxRadius: 40),
+                ),
+              ],
             ),
           ),
           if (widget.customPaint != null) widget.customPaint!,

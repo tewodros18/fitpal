@@ -32,7 +32,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.2
   flutter_svg: ^2.0.5
   google_mlkit_commons: null
   google_mlkit_pose_detection: ^0.5.0
@@ -41,6 +40,7 @@ dependencies:
   text_to_speech: ^0.2.3
   model_viewer_plus: ^1.5.0
   google_sign_in: ^5.4.1
+  flutter_bloc: ^8.0.1
   flutter_secure_storage: ^5.1.0
 
 dev_dependencies:
