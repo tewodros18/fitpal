@@ -23,7 +23,7 @@ class Header extends StatelessWidget {
           // const Spacer(),
           InkWell(
             onTap: () {},
-            child: const Row(
+            child: Row(
               children: [
                 Text(
                   "Edit",
