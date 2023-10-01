@@ -1,5 +1,4 @@
 # FitPal
-## Flutter App for the Fitness App
 
 This repository contains the Flutter code for the Fitness app. The app provides personalized workout programs, clear animated exercise videos, live feedback, nutrition tracking with local African foods, community features like challenges, and nearby sports venue information.
 
