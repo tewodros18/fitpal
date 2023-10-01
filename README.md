@@ -1,5 +1,4 @@
 # FitPal
-
 This repository contains the Flutter code for the Fitness app. The app provides personalized workout programs, clear animated exercise videos, live feedback, nutrition tracking with local African foods, community features like challenges, and nearby sports venue information.
 
 ### Installation
@@ -26,4 +25,12 @@ flutter run
 - **Search Nearby Sport Activities**: The app can use geolocation technology to identify the user's location and display nearby sports venues. Users can filter the results based on the type of activity they're interested in, such as weightlifting, football, hiking, etc
 
 - **Mental Health** - The platform will also provide resources and tools to support users' mental health, such as guided meditations, and stress-management techniques.
+
+<table>
+  <tr>
+    <td><img src="https://github.com/tewodros18/fitpal/assets/58773098/363c0f89-aa4c-401e-94d9-2bf2e7e5420e"  alt="1" width = 360px height = 640px ></td>
+    
+    
+  </tr>
+</table>
 
